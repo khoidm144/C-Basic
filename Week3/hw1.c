@@ -31,71 +31,48 @@ node createNode()
     temp->next = NULL;
     return temp;
 }
-node insertionToTail(node root)
+node insertionToHead(node root)
 {
     node temp = createNode();
-    node p;
     if (root == NULL)
     {
         root = temp;
+        return root;
     }
     else
     {
-        p = root;
-        while (p->next != NULL)
-        {
-            p = p->next;
-        }
-        p->next = temp;
-    }
-    return root;
-}
-node insertionAt(node root,int index)
-{
-    int count = 0;
-    node p = root;
-    node temp = createNode();
-    if (index == 0)
-    {
+        temp->next = root;
         root = temp;
-        root->next = p;
         return root;
     }
-    while (count != index - 1)
-    {
-        p = p->next;
-        count++;
-    }
-    node cur = p->next;
-    p->next = temp;
-    p->next->next = cur;
-    return root;
 }
 void printAll(node root)
 {
+    if (root == NULL)
+    {
+        printf("Empty List ! \n");
+        return;
+    }
+    printf("Name                 Tel        Email                             \n");
     for (node temp = root; temp != NULL; temp = temp->next)
     {
-        printf("%s %d %s\n", temp->addr.name, temp->addr.tel, temp->addr.email);
+        printf("%-20s %-10d %-30s\n", temp->addr.name, temp->addr.tel, temp->addr.email);
     }
 }
-node removeAt(node root, int index)
+node searchByName(node root, char *name)
 {
-    int count = 0;
-    node p = root;
-    if (index == 0)
+    if (root == NULL)
     {
-        root = p->next;
-        free(p);
         return root;
     }
-    while (count != index - 1)
+    for (node temp = root; temp != NULL; temp = temp->next)
     {
-        p = p->next;
-        count++;
+        if (strcmp(name, temp->addr.name) == 0)
+        {
+            return temp;
+        }
     }
-    printf("%d", count);
-    p->next = p->next->next;
-    return root;
+    return NULL;
 }
 node freeList(node root)
 {
@@ -135,11 +112,11 @@ int main()
     while (1)
     {
         printf("Input the function you want! \n");
-        printf("1.Insert At\n");
+        printf("1.Insert at Head\n");
         printf("2.Print all nodes \n");
-        printf("3.Delete a node\n");
-        printf("4.Freelist\n");
-        printf("5.Reverset \n");
+        printf("3.Search by name \n");
+        printf("4.Reverse\n");
+        printf("5.Freelist\n");
         printf("6.Exit\n");
         printf("Choice : ");
         scanf("%d", &n);
@@ -148,10 +125,7 @@ int main()
         {
         case 1:
         {
-            int index;
-            printf("Input the index (from 0 index) of the node you want to insert: ");
-            scanf("%d%*c", &index);
-            root = insertionAt(root, index);
+            root = insertionToHead(root);
             break;
         }
         case 2:
@@ -161,20 +135,31 @@ int main()
         }
         case 3:
         {
-            int index;
-            printf("Input the index (from 0 index) of the node you want to remove: ");
-            scanf("%d%*c", &index);
-            root = removeAt(root, index);
+
+            node temp;
+            printf("Input the name you want to search: ");
+            scanf("%[^\n]%*c", name);
+            temp = searchByName(root, name);
+            if (temp == NULL)
+            {
+                printf("Not found ! \n");
+            }
+            else
+            {
+                printf("Name                 Tel        Email                             \n");
+                printf("%-20s %-10d %-30s\n", temp->addr.name, temp->addr.tel, temp->addr.email);
+            }
+
             break;
         }
         case 4:
         {
-            root = freeList(root);
+            root = reverse(root);
             break;
         }
         case 5:
         {
-            root = reverse(root);
+            root = freeList(root);
             break;
         }
         case 6:
