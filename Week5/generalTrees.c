@@ -69,8 +69,35 @@ void movePointer()
         p = temp;
     }
 }
-void addNodeChild(node cur){
-     
+void addNodeChild(char *name, node cur)
+{
+    node temp = makeNode(name);
+    if (cur->leftMostChild == NULL)
+    {
+        cur->leftMostChild = temp;
+        return;
+    }
+    node p = cur->leftMostChild;
+    while (p->rightSibling != NULL)
+    {
+        p = p->rightSibling;
+    }
+    p->rightSibling = temp;
+}
+int height(int now, node root)
+{
+    if (root == NULL)
+    {
+        return now;
+    }
+    if (root->leftMostChild == NULL)
+    {
+        return now;
+    }
+    now++;
+    int a = height(now, root->leftMostChild);
+    int b = height(now, root->rightSibling);
+    return a > b ? a: b ;
 }
 int main()
 {
@@ -84,9 +111,9 @@ int main()
         printf("1.Move pointer\n");
         printf("2.Print all nodes \n");
         printf("3.Add next to Pointer\n");
-        printf("4.Add Child to Pointer\n");
         printf("4.Print the content of Pointer\n");
-        printf("5.Exit \n");
+        printf("5.Add Child to Pointer\n");
+        printf("6.Exit \n");
         printf("Choice : ");
         scanf("%d%*c", &n);
         switch (n)
@@ -99,6 +126,7 @@ int main()
         case 2:
         {
             traverseTree(root);
+            printf("Height : %d\n",height(1,root));
             break;
         }
         case 3:
@@ -111,6 +139,13 @@ int main()
         case 4:
         {
             printf("%s\n", p->name);
+            break;
+        }
+        case 5:
+        {
+            printf("Input the content  of the node : ");
+            scanf("%[^\n]%*c", name);
+            addNodeChild(name, p);
             break;
         }
         }
