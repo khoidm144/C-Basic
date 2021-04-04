@@ -79,6 +79,6 @@ int main()
     findShortestPath(mat, visited, 6, 5, 0);
     int min_dist = INT_MAX;
     printf("--------------------\n");
-    printf("%d", min);
+    printf("The shortest way is %d steps\n", min);
     return 0;
 }

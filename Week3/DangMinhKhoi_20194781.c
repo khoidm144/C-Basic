@@ -77,7 +77,7 @@ node searchByID(node root, char *id)
 {
     if (root == NULL)
     {
-        printf("No\n");
+        printf("Empty List ! \n");
         return root;
     }
     for (node temp = root; temp != NULL; temp = temp->next)
@@ -118,8 +118,7 @@ int main()
         printf("4.Freelist\n");
         printf("5.Exit \n");
         printf("Choice : ");
-        scanf("%d", &n);
-        fflush(stdin);
+        scanf("%d%*c", &n);
         switch (n)
         {
         case 1:
@@ -138,7 +137,7 @@ int main()
         case 3:
         {
             node temp;
-            printf("Input the name you want to search: ");
+            printf("Input the ID you want to search: ");
             scanf("%[^\n]%*c", id);
             temp = searchByID(root, id);
             if (temp == NULL)
@@ -161,7 +160,6 @@ int main()
             return 0;
         }
         }
-        printf("Count element: %d\n", count);
     }
     return 0;
 }
