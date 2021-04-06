@@ -1,0 +1,6 @@
+david jame peter john $
+peter mary daisy $
+jame mike $
+john johnny $
+johnny michael $
+$$
