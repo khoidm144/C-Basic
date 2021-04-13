@@ -88,20 +88,25 @@ void addLeftChild(int cur, int new)
     }
     temp->leftChild = makeNode(new);
 }
-int height(int now, node root)
+int height(node root)
 {
     if (root == NULL)
     {
-        return now;
+        return 0;
     }
-    if (root->leftChild == NULL && root->rightChild==NULL)
+    else
     {
-        return now;
+        int leftHeight = height(root->leftChild);
+        int rightHeight = height(root->rightChild);
+        if (leftHeight > rightHeight)
+        {
+            return leftHeight + 1;
+        }
+        else
+        {
+            return rightHeight + 1;
+        }
     }
-    now++;
-    int a = height(now, root->leftChild);
-    int b = height(now, root->rightChild);
-    return a > b ? a : b;
 }
 int main()
 {
@@ -125,7 +130,7 @@ int main()
         case 1:
         {
             traverseTree(root);
-            printf("Height : %d\n", height(1, root));
+            printf("Height : %d\n", height(root));
             break;
         }
         case 2:
