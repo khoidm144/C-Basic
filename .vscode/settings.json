@@ -3,5 +3,6 @@
         "limits": "c",
         "*.tcc": "c",
         "type_traits": "c"
-    }
+    },
+    "code-runner.runInTerminal": true
 }

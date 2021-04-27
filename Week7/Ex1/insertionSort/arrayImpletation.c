@@ -6,19 +6,20 @@ typedef struct AddressStruct
     char phone[15];
     char email[30];
 } address;
-
-void insertionSort(address arr[], int n)
+int count =0;
+void selectionSort(address arr[], int n)
 {
     int i, j;
     address next;
-    for (i = 0; i < n-1; i++)
-    {   
-        for(j=i+1;j<n;j++)
-        if(strcmp(arr[i].name,arr[j].name)>0){
-            address temp=arr[i];
-            arr[i]=arr[j];
-            arr[j]=temp;
+    for (i = 1; i < n; i++)
+    {
+        next = arr[i];
+        for (j = i - 1; j >= 0 && (strcmp(next.name, arr[j].name) < 0); j--)
+        {
+            count++;
+            arr[j + 1] = arr[j];
         }
+        arr[j + 1] = next;
     }
 }
 void printArr(address arr[], int n)
@@ -30,16 +31,16 @@ void printArr(address arr[], int n)
 }
 int main()
 {
-    FILE *input = fopen("data.txt", "r+");
+    FILE *input = fopen("data.txt", "r");
     char name[20];
-    char phone[15];
+    int phone;
     char email[30];
     address temp;
     int index = 0;
     address arr[30];
     while (!feof(input))
     {
-        if (fscanf(input, "%[^\n]%*c", name) <=0)
+        if (fscanf(input, "%[^\n]%*c", name) == EOF)
         {
             break;
         }
@@ -47,11 +48,9 @@ int main()
         fscanf(input, "%[^\n]%*c", temp.phone);
         fscanf(input, "%[^\n]%*c", temp.email);
         arr[index++] = temp;
-        printf("%s",name);
     }
     index++;
-    printArr(arr,index);
-    insertionSort(arr, index);
+    selectionSort(arr, index);
     printArr(arr, index);
-    fclose(input);
+    printf("Comparision made : %d time(s)",count);
 }

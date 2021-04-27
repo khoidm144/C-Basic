@@ -6,12 +6,13 @@ typedef struct AddressStruct
     char phone[15];
     char email[30];
 } address;
-
+int count =0;
 void heapify(address arr[], int n, int i)
 {
     int largest = i;
     int l = i * 2 + 1;
     int r = i * 2 + 2;
+    count++;
     if (l < n && strcmp(arr[l].name, arr[largest].name) > 0)
     {
         largest = l;
@@ -71,4 +72,5 @@ int main()
     }
     heapSort(arr, index);
     printArr(arr, index);
+    printf("Comparision made : %d time(s)",count);
 }
