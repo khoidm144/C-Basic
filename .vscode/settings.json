@@ -2,7 +2,9 @@
     "files.associations": {
         "limits": "c",
         "*.tcc": "c",
-        "type_traits": "c"
+        "type_traits": "c",
+        "typeinfo": "c",
+        "cstdio": "c"
     },
     "code-runner.runInTerminal": true
 }

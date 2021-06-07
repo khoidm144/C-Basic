@@ -1,0 +1,10 @@
+hello xin_chao
+happy vui_ve
+good_morning chao_buoi_sang
+bye tam_biet
+apple tao
+orange cam
+banana chuoi
+data du_lieu
+structure cau_truc
+algorithm thuat_toan
